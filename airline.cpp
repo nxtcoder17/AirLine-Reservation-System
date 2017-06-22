@@ -1,3 +1,4 @@
+//This is a C++ program as a simulation for Airline Reservation System
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
