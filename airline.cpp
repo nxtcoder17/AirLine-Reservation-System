@@ -1,4 +1,3 @@
-//This is a C++ code for an Airline - Reservation - System
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -166,7 +165,7 @@ class FLIGHTS
 
 int main()
 {
-start :
+start:
     cout << "*********************************************************************\n";
     cout <<"..............Welcome to the Phenomenal Airline Services ............\n";
     cout << "*********************************************************************\n";
@@ -182,12 +181,13 @@ start :
 
         cout << "Please Enter your Preferred Choice :- ";
         cin >> choice;
-        if(choice<1 || choice >6)
+        char ch = choice;
+        if(ch < 17 || ch > 22)
         {
             cout << "\nInvalid Choice . Please Try Again .\n";
             k++;
         }
-    }while (k != 0);
+    }while(k != 0);
 
     switch (choice)
     {
@@ -285,6 +285,8 @@ start :
                                f3.read((char *)&s,sizeof(s));
                             }
 
+                            f3.close();
+
                             if (flag == 0)
                             cout << "\t!!!!!!Search Query Not Found!!!!!!!!\n";
                             f3.close();
@@ -321,6 +323,7 @@ start :
                                 }
                                f3.read((char *)&s,sizeof(s));
                             }
+                            f3.close();
 
                             if(flag == 0)
                                 cout << "\t\tSearch Query Not Found !!!\n";
@@ -356,7 +359,10 @@ start :
                                     s.disInfo();
                                     flag = 1;
                                 }
+                                f3.read((char *)&s,sizeof(s));
                             }
+
+                            f3.close();
 
                             if(flag == 0)
                                 cout << "\t\tSearch Query Not Found !!!!\n";
@@ -384,14 +390,17 @@ start :
                             cout.setf(ios::left);
                             cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
                             cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
-                            while (f3.eof() != 0)
+                            while (f3.eof() != 1)
                             {
-                                if (sMobile,s.mobile)
+                                if (sMobile == s.mobile)
                                 {
                                     s.disInfo();
                                     flag = 1;
                                 }
+                                f3.read((char *)&s,sizeof(s));
                             }
+
+                            f3.close();
 
                             if(flag == 0)
                                 cout << "\tSearch Query Not Found !!!!!!!!\n";
@@ -405,6 +414,7 @@ start :
                             else
                                 goto start;
                         }
+                        break;
                 }
 
             }
