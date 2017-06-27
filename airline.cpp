@@ -7,12 +7,14 @@
 #include <cstdio>
 using namespace std;
 
+//Global Variables
+int flag = 0;
+
 class BOOKING
 {
-    public :
         char name[20];
         char add[50];
-        char email[50];
+        char email[30];
         long mobile;
         int age;
         char sex;
@@ -20,30 +22,48 @@ class BOOKING
         char arrival[25];
         char date[10];
         long long aadhar;
+
     public :
-        int getInfo()
+        void getName()
         {
             cout << "Enter Passenger's Name :- ";
             cin.get();
             cin.getline(name,20);
+        }
 
+        void getEmail()
+        {
+            cout << "Enter your email address :- ";
+            cin.get();
+            cin.getline(email,50);
+        }
+
+        void getMobile()
+        {
+            cout << "Enter your Mobile Number :- ";
+            cin >> mobile;
+        }
+
+        void getGen()
+        {
             cout << "Enter the Address Details :- ";
             cin.getline(add,50);
-
-            cout << "Enter your email address :- ";
-            cin.getline(email,50);
-
-            cout << "Enter your Phone Number :- ";
-            cin >> mobile;
 
             cout << "Enter your Age :- ";
             cin >> age;
 
             cout <<"Enter Sex(M/F) :- ";
             cin >> sex;
+        }
 
+        void getAadhar()
+        {
             cout << "Enter Aadhar Number :- ";
             cin >> aadhar;
+        }
+
+        void getTravel()
+        {
 
             int n;
             int k = 0;
@@ -131,6 +151,133 @@ class BOOKING
             cin >> date;
         }
 
+        //Now Functions for Comparison
+        void searchName(char query[20])
+        {
+            if(strcmp(query,name) == 0)
+            {
+                cout << "\t\t!!! Name found in Records !!!\n";
+                flag = 1;
+                disInfo();
+            }
+        }
+
+        void searchEmail(char query[30])
+        {
+            if(strcmp(query,email) == 0)
+            {
+                cout << "\t\t!!! Email matched in Records !!!\n";
+                flag = 1;
+                disInfo();
+            }
+        }
+
+        void searchAadhar(long long query)
+        {
+            if(query == aadhar)
+            {
+                cout << "\t\t!!! Aadhar ID matched in Records !!!\n";
+                flag = 1;
+                disInfo();
+            }
+        }
+
+        void searchMobile(long query)
+        {
+            if(query == mobile)
+            {
+                cout << "\t\t!!! Mobile Number found in the Records !!!\n";
+                flag = 1;
+                disInfo();
+            }
+        }
+
+        //Modifications
+        void modName(char query[20])
+        {
+            if(strcmp(query,name) == 0)
+            {
+                cout << "\t\t!!! Entry Found !!!\n";
+                flag = 1;
+                cout << "Currently list is :- \n";
+                disInfo();
+
+                //Modifying
+                char moName[20];
+                cout << "Enter the correct Name :- ";
+                cin.getline(moName,20);
+
+                strcpy(name,moName);
+                cout << "\t\t!!! Successfully Modified Name !!!\n";
+                cout << "The Modified list is as follows :- \n";
+                disInfo();
+            }
+        }
+
+        void modEmail(char query[30])
+        {
+            if(strcmp(query,email) == 0)
+            {
+                cout << "\t\t!!! Email matched in Records !!!\n";
+                flag = 1;
+                cout << "Current details are :-\n";
+                disInfo();
+
+                //Modifying
+                char moEmail[30];
+                cout << "Enter the Correct Email ID :- ";
+                cin.getline(moEmail,30);
+
+                strcpy(email,moEmail);
+                cout << "\t\t!!! Email Successfully Modified !!!\n";
+                cout << "The Modified Details are :- \n";
+                disInfo();
+            }
+        }
+
+        void modAadhar(long long query)
+        {
+            if(query == aadhar)
+            {
+                cout << "\t\t!!! Aadhar ID matched in Records !!!\n";
+                flag = 1;
+                cout << "Current Details are :- \n";
+                disInfo();
+
+                //Modiying
+                long long moAadhar;
+                cout << "Enter the Correct Aadhar Card Number :- ";
+                cin >> moAadhar;
+
+                aadhar = moAadhar;
+                cout << "\t\t!!! Aadhar Successfully Modified !!! \n";
+                cout << "Modified Details are :- \n";
+                disInfo();
+            }
+        }
+
+        void modMobile(long query)
+        {
+            if(query == mobile)
+            {
+                cout << "\t\t!!! Mobile Number found in the Records !!!\n";
+                flag = 1;
+                cout << "Current Details are :- \n";
+                disInfo();
+
+                //Modifying
+                long moMobile;
+                cout << "Enter the Correct Mobile Number :- ";
+                cin >> moMobile;
+
+                mobile = moMobile;
+                cout << "\t\t!!! Mobile No. Successfully Modified !!!\n";
+                cout << "Modified Details are :- \n";
+                disInfo();
+            }
+        }
+
+        //Displaying whatever we got above
         int disInfo()
         {
             cout.setf(ios::left);
@@ -243,7 +390,12 @@ start:
 
                 do
                 {
-                    b.getInfo();
+                    b.getName();
+                    b.getGen();
+                    b.getEmail();
+                    b.getAadhar();
+                    b.getMobile();
+                    b.getTravel();
                     f1.write((char *)&b , sizeof(b));
 
                     cout << "\n\t\tBooking Details are following\n";
@@ -297,7 +449,7 @@ start:
                 long sMobile;
                 long long sAadhar;
                 f3.open("booking.dat",ios::in|ios::out|ios::binary);
-                cout << "\tChoose the Criteria by which you want to search the PASSENGERS list\n";
+                cout << "\tChoose the Criteria by which you want to search through the PASSENGERS list\n";
                 cout <<"\t1. By Name\n\t2. By Email\n";
                 cout <<"\t3. By Aadhar Number(Recommended)\n\t4. By Phone Number\n";
 
@@ -317,17 +469,12 @@ start:
                             cout.setf(ios::left);
                             cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
                             cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
-                            while (f3.eof() != 1)
-                            {
-                                if (strcmp(sName,s.name) == 0)
-                                {
-                                    s.disInfo();
-                                    flag = 1;
-                                }
-                               f3.read((char *)&s,sizeof(s));
-                            }
 
-                            f3.close();
+                            while(f3.eof() != 1)
+                            {
+                                s.searchName(sName);
+                                f3.read((char *)&s,sizeof(s));
+                            }
 
                             if (flag == 0)
                             cout << "\t!!!!!!Search Query Not Found!!!!!!!!\n";
@@ -346,7 +493,6 @@ start:
 
                     case 2:
                         {
-                            int flag = 0;
                             cout << "Enter the Email-id you want to search :- ";
                             cin >> sEmail;
 
@@ -356,13 +502,10 @@ start:
                             cout.setf(ios::left);
                             cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
                             cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+
                             while (f3.eof() != 1)
                             {
-                                if (strcmp(sEmail,s.email) == 0)
-                                {
-                                    s.disInfo();
-                                    flag = 1;
-                                }
+                               s.searchEmail(sEmail);
                                f3.read((char *)&s,sizeof(s));
                             }
                             f3.close();
@@ -394,15 +537,9 @@ start:
                             cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
                             cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
-                            int pos;
                             while (f3.eof() != 1)
                             {
-                                if(sAadhar == s.aadhar)
-                                {
-                                    pos = f3.tellg();
-                                    s.disInfo();
-                                    flag = 1;
-                                }
+                                s.searchAadhar(sAadhar);
                                 f3.read((char *)&s,sizeof(s));
                             }
 
@@ -410,8 +547,6 @@ start:
 
                             if(flag == 0)
                                 cout << "\t\tSearch Query Not Found !!!!\n";
-
-                            cout << pos/sizeof(s) <<endl;
 
                             char c3_3;
                             cout << "\tPress 'q' to quit or Any Other Key to go to HomeScreen\n";
@@ -426,7 +561,6 @@ start:
 
                     case 4:
                         {
-                            int flag = 0;
                             cout << "Please Enter the phone number which you want to search :- ";
                             cin >> sMobile;
 
@@ -436,13 +570,10 @@ start:
                             cout.setf(ios::left);
                             cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
                             cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+
                             while (f3.eof() != 1)
                             {
-                                if (sMobile == s.mobile)
-                                {
-                                    s.disInfo();
-                                    flag = 1;
-                                }
+                                s.searchMobile(sMobile);
                                 f3.read((char *)&s,sizeof(s));
                             }
 
@@ -469,100 +600,90 @@ start:
         case 4:
             {
                 BOOKING m;
-                int decision;
-                cout << "Please choose the way you want to modify details \n";
-                cout << "1. Line Number \t2. Phone Number\n";
-                cin >> decision;
+                fstream f4;
+                int choice_4;
+                f4.open("booking.dat",ios::in|ios::out|ios::binary);
+                cout << "\t\t.............Welcome to the Modifications Portal...............\n";
+                cout << "Please carefully choose among the following modifications you can perform on your already Booked Ticket\n";
+                cout << "\t\t1. Edit Name\n";
+                cout << "\t\t2. Edit Email\n";
+                cout << "\t\t3. Edit Aadhar ID\n";
+                cout << "\t\t4. Edit Mobile No.\n";
 
-                switch (decision)
-                {
-                    case 1:
-                        {
-                            fstream f4;
-                            int line;
-                            cout << "Enter the line number which you want to modify :- ";
-                            cin >> line;
+                cout << "Enter your preferred Choice :- ";
+                cin >> choice_4;
 
-                            int pos;
-                            pos = (line -1) *sizeof(m);
-                            f4.open("booking.dat",ios::in|ios::out|ios::binary);
-
-                            f4.seekp(pos,ios::beg);
-                            m.getInfo();
-                            f4.write((char *)&m,sizeof(m));
-                            f4.close();
-                            cout << "\t\tSuccessfully Modified.....\n";
-
-                            char c4;
-                            cout << "\tEnter 'q' to quit or Any Other key to go to HomeScreen\n";
-                            cin >> c4;
-
-                            if(c4 == 'q'|| c4 == 'Q')
-                                exit(EXIT_FAILURE);
-                            else
-                                goto start;
-                        }
-                        break;
-
-                    case 2:
-                        {
-                            fstream f4;
-                            long mMobile;
-                            int flag = 0;
-                            char choice;
-                            int pos;
-                            int line = 0;
-                            cout << "Enter the Phone Number over which you want to modify the details :-  ";
-                            cin >> mMobile;
-
-                            f4.open("booking.dat",ios::in|ios::binary);
-
-                            f4.seekg(0,ios::beg);
-                            f4.read((char *)&m,sizeof(m));
-                            cout.setf(ios::left);
-                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
-
-                            while(f4.eof() != 1)
+                if(choice_4 >= 1 && choice_4 <= 4 )
+                    switch(choice_4)
+                    {
+                        case 1:
                             {
-                                if(mMobile == m.mobile)
-                                {
-                                    pos = f4.tellg();
-                                    m.disInfo();
-                                    flag = 1;
-                                    goto found;
-                                }
+                                char mName[20];
+                                cout << "Enter the misspelt Name ;- ";
+                                cin.get();
+                                cin.getline(mName,20);
+
+                                f4.seekg(0,ios::beg);
                                 f4.read((char *)&m,sizeof(m));
+
+                                while(f4.eof() != 1)
+                                {
+                                    m.modName(mName);
+                                    f4.read((char *)&m,sizeof(m));
+                                }
+
+                                f4.close();
+                                if (flag == 0)
+                                    cout << "\t\t!!! No matching name found !!!\n";
+
+                                char c4_1;
+                                cout << "\tPress 'q' to quit or Any other key to go to HomeScreen\n";
+                                cin >> c4_1;
+
+                                if(c4_1 == 'q' || c4_1 == 'Q')
+                                    exit(EXIT_FAILURE);
+                                else
+                                    goto start;
                             }
-                            if(flag == 0)
+                            break;
+
+                        case 2:
                             {
-                                cout << "\n\tYou entered an invalid Phone Number \n";
-                                goto end;
+                                char mEmail[30];
+                                cout << "Enter the incorrect mail-id :- ";
+                                cin.getline(mEmail,30);
+
+                                f4.seekg(0,ios::beg);
+                                f4.read((char *)&m,sizeof(m));
+
+                                while(f4.eof() != 1)
+                                {
+                                    m.modEmail(mEmail);
+                                    f4.read((char *)&m,sizeof(m));
+                                }
+                                f4.write((char *)&m,sizeof(m));
+                                f4.close();
+
+                                if (flag == 0)
+                                    cout << "\t\tSearch Query not found\n";
+
+                                char c4_2;
+                                cout << "\tPress 'q' to quit or Any other key to go to HomeScreen\n";
+                                cin >> c4_2;
+
+                                if(c4_2 == 'q' || c4_2 == 'Q')
+                                    exit(EXIT_FAILURE);
+                                else
+                                    goto start;
                             }
+                            break;
+                    }
 
-found:
-                            pos = pos / sizeof(m);       //Line Number in the booking.dat file
-                            pos = (pos - 1) * sizeof(m); 
-                            f4.seekp(pos,ios::beg);
-                            m.getInfo();
-                            f4.write((char *)&m,sizeof(m));
-                            f4.close();
-                            cout << "\t\t!!!Successfully Modified!!!\n";
-end :
-                            cout << "\tPress 'q' to terminate or Any other key to go to Home Screen :- ";
-                            cin >> choice;
-
-                            if(choice == 'q' || choice == 'Q')
-                                exit(EXIT_FAILURE);
-                            else
-                                goto start;
-                        }
-                }
 
             }
             break;
 
-        case 5:
+/*          case 5:
             {
                 BOOKING c;
                 fstream f5,fr;
@@ -600,7 +721,7 @@ end :
 
             }
             break;
-
+*/
         case 6:
             {
                 BOOKING p;
