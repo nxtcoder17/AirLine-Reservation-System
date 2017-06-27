@@ -20,7 +20,6 @@ class BOOKING
         char arrival[25];
         char date[10];
         long long aadhar;
-        int sNo = 0 ;
     public :
         int getInfo()
         {
@@ -134,13 +133,12 @@ class BOOKING
 
         int disInfo()
         {
-            sNo += 1;
             cout.setf(ios::left);
-            cout <<setw(8)<<sNo<<setw(15)<< name <<setw(12)<< date <<setw(20)<< add <<setw(15)<< mobile <<setw(30)<<email<<setw(20)<<aadhar<<setw(12)<< departure <<setw(12)<< arrival<<endl;
+            cout <<setw(15)<< name <<setw(12)<< date <<setw(20)<< add <<setw(15)<< mobile <<setw(30)<<email<<setw(20)<<aadhar<<setw(12)<< departure <<setw(12)<< arrival<<endl;
         }
 
 };
-class FLIGHTS
+/*class FLIGHTS
 {
     char flight_no[10];
     char flight_carrier[20];
@@ -162,11 +160,53 @@ class FLIGHTS
             cout << "Enter the arrival time :- ";
             cin >> time_arrival;
         }
-};
+};*/
+
+void adminPass()
+{
+    char admin;
+    char password[] = "phenomenal";
+    char pass[15];
+    char p;
+    cout << "\n\t\tWarning !!!!\n";
+    cout << "You can access this feature only if you are the Flight Admininstrator of the Phenomenal Airline Services\n";
+    cout << "\n\tIf you are an administrator , press 'A'('a') to continue :- ";
+    cin >> admin;
+
+    if(admin == 'A' || admin == 'a')
+    {
+pass:
+        cout << "Enter your Administrative Password :- ";
+        cin >> pass;
+
+        if(strcmp(pass,password) == 0)
+        {
+            cout << "\tCongratulations You are an Adminstrator\n";
+            //goto flight;
+        }
+        else
+        {
+            cout << "\tYou entered an Incorrect Password\n";
+            cout << "Press 'c' to Re-enter your Administrator Password (Pressing Anything else will lead to termiantion of program) :- ";
+            cin >> p;
+
+            if(p == 'c'||p == 'C')
+               goto pass;
+            else
+                exit(EXIT_FAILURE);
+        }
+    }
+    else
+    {
+        cout << "Since You are not the Administrator , we are terminating the program\n";
+        exit(EXIT_FAILURE);
+    }
+}
 
 int main()
 {
 start:
+    cout << endl;
     cout << "*********************************************************************\n";
     cout <<"..............Welcome to the Phenomenal Airline Services ............\n";
     cout << "*********************************************************************\n";
@@ -182,8 +222,7 @@ start:
 
         cout << "Please Enter your Preferred Choice :- ";
         cin >> choice;
-        char ch = choice;
-        if(ch < 17 || ch > 22)
+        if(choice < 1 || choice > 6)
         {
             cout << "\nInvalid Choice . Please Try Again .\n";
             k++;
@@ -210,8 +249,8 @@ start:
                     cout << "\n\t\tBooking Details are following\n";
                     cout << "\t\t-----------------------------\n";
                     cout.setf(ios::left);
-                    cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                    cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                    cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                    cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                     b.disInfo();
                     cout << "\nDo you want to register again ?\n";
                     cout << "(Y for yes,N for no)";
@@ -230,9 +269,10 @@ start:
             }
             break;
 
-        /*  case 2:
+        case 2:
             {
-                FLIGHTS f;
+                adminPass();
+                /*  FLIGHTS f;
                 fstream f2;
                 f2.open("flights.dat",ios::in|ios::out|ios::app);
                 char ch = 'Y';
@@ -243,8 +283,9 @@ start:
 
                       cout << "Do you want to add more Flights in the list(y/n) :- ";
                       cin >> ch;
-                  }
-            }*/
+                  }*/
+                }
+            break;
 
         case 3:
             {
@@ -274,8 +315,8 @@ start:
                             f3.seekg(0,ios::beg);
                             f3.read((char *)&s,sizeof(s));
                             cout.setf(ios::left);
-                            cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                             while (f3.eof() != 1)
                             {
                                 if (strcmp(sName,s.name) == 0)
@@ -313,8 +354,8 @@ start:
                             f3.read((char *)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                             while (f3.eof() != 1)
                             {
                                 if (strcmp(sEmail,s.email) == 0)
@@ -350,13 +391,15 @@ start:
                             f3.read((char*)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
+                            int pos;
                             while (f3.eof() != 1)
                             {
                                 if(sAadhar == s.aadhar)
                                 {
+                                    pos = f3.tellg();
                                     s.disInfo();
                                     flag = 1;
                                 }
@@ -367,6 +410,8 @@ start:
 
                             if(flag == 0)
                                 cout << "\t\tSearch Query Not Found !!!!\n";
+
+                            cout << pos/sizeof(s) <<endl;
 
                             char c3_3;
                             cout << "\tPress 'q' to quit or Any Other Key to go to HomeScreen\n";
@@ -389,8 +434,8 @@ start:
                             f3.read((char *)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                             while (f3.eof() != 1)
                             {
                                 if (sMobile == s.mobile)
@@ -424,50 +469,117 @@ start:
         case 4:
             {
                 BOOKING m;
-                int line;
-                fstream f4;
-                cout << "Enter the line number which you want to modify :- ";
-                cin >> line;
+                int decision;
+                cout << "Please choose the way you want to modify details \n";
+                cout << "1. Line Number \t2. Phone Number\n";
+                cin >> decision;
 
-                int pos;
-                pos = (line -1) *sizeof(m);
-                f4.open("booking.dat",ios::in|ios::out|ios::binary);
+                switch (decision)
+                {
+                    case 1:
+                        {
+                            fstream f4;
+                            int line;
+                            cout << "Enter the line number which you want to modify :- ";
+                            cin >> line;
 
-                f4.seekp(pos,ios::beg);
-                m.getInfo();
-                f4.write((char *)&m,sizeof(m));
-                f4.close();
-                cout << "\t\tSuccessfully Modified.....\n";
+                            int pos;
+                            pos = (line -1) *sizeof(m);
+                            f4.open("booking.dat",ios::in|ios::out|ios::binary);
 
-                char c4;
-                cout << "\tEnter 'q' to quit or Any Other key to go to HomeScreen\n";
-                cin >> c4;
+                            f4.seekp(pos,ios::beg);
+                            m.getInfo();
+                            f4.write((char *)&m,sizeof(m));
+                            f4.close();
+                            cout << "\t\tSuccessfully Modified.....\n";
 
-                if(c4 == 'q'|| c4 == 'Q')
-                    exit(EXIT_FAILURE);
-                else
-                    goto start;
+                            char c4;
+                            cout << "\tEnter 'q' to quit or Any Other key to go to HomeScreen\n";
+                            cin >> c4;
+
+                            if(c4 == 'q'|| c4 == 'Q')
+                                exit(EXIT_FAILURE);
+                            else
+                                goto start;
+                        }
+                        break;
+
+                    case 2:
+                        {
+                            fstream f4;
+                            long mMobile;
+                            int flag = 0;
+                            char choice;
+                            int pos;
+                            int line = 0;
+                            cout << "Enter the Phone Number over which you want to modify the details :-  ";
+                            cin >> mMobile;
+
+                            f4.open("booking.dat",ios::in|ios::binary);
+
+                            f4.seekg(0,ios::beg);
+                            f4.read((char *)&m,sizeof(m));
+                            cout.setf(ios::left);
+                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+
+                            while(f4.eof() != 1)
+                            {
+                                if(mMobile == m.mobile)
+                                {
+                                    pos = f4.tellg();
+                                    m.disInfo();
+                                    flag = 1;
+                                    goto found;
+                                }
+                                f4.read((char *)&m,sizeof(m));
+                            }
+                            if(flag == 0)
+                            {
+                                cout << "\n\tYou entered an invalid Phone Number \n";
+                                goto end;
+                            }
+
+found:
+                            pos = pos / sizeof(m);       //Line Number in the booking.dat file
+                            pos = (pos - 1) * sizeof(m); 
+                            f4.seekp(pos,ios::beg);
+                            m.getInfo();
+                            f4.write((char *)&m,sizeof(m));
+                            f4.close();
+                            cout << "\t\t!!!Successfully Modified!!!\n";
+end :
+                            cout << "\tPress 'q' to terminate or Any other key to go to Home Screen :- ";
+                            cin >> choice;
+
+                            if(choice == 'q' || choice == 'Q')
+                                exit(EXIT_FAILURE);
+                            else
+                                goto start;
+                        }
+                }
+
             }
             break;
 
         case 5:
             {
                 BOOKING c;
-                fstream f4,fr;
-                f4.open("booking.dat",ios::in|ios::out|ios::binary);
+                fstream f5,fr;
+                f5.open("booking.dat",ios::in|ios::out|ios::binary);
                 fr.open("b.dat",ios::in|ios::out|ios::binary|ios::app);
 
                 char nam[20];
                 cout << "Enter the Name for which you want to cancel the ticket :- ";
                 cin >> nam;
 
-                f4.seekg(0,ios::beg);
-                f4.read((char*)&c,sizeof(c));
-                while (f4.eof() != 1)
+                f5.seekg(0,ios::beg);
+                f5.read((char*)&c,sizeof(c));
+                while (f5.eof() != 1)
                 {
                     if(strcmp(nam,c.name) != 0)
                         fr.write((char *)&c,sizeof(c));
-                    f4.read((char*)&c,sizeof(c));
+                    f5.read((char*)&c,sizeof(c));
                 }
 
                 cout << "\n\t******Ticket Cancellation Successful******\n";
@@ -475,7 +587,7 @@ start:
                 remove ("booking.dat");
                 rename ("b.dat","booking.dat");
 
-                f4.close();
+                f5.close();
                 fr.close();
                 char c5;
                 cout << "\tEnter 'q' to quit or Any Other key to go to HomeScreen\n";
@@ -499,8 +611,8 @@ start:
                 f6.read ((char *)&p,sizeof(p));
                 cout.setf(ios::left);
                 cout <<endl;
-                cout <<setw(8)<<"S.No."<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                cout <<setw(8)<<"-----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                 while(f6.eof() != 1)
                 {
                     p.disInfo();
