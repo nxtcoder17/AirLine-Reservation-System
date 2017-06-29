@@ -192,8 +192,8 @@ class BOOKING
             }
         }
 
-        //Modifications
-        void modName(char query[20])
+        //Modifications for the Mofify module
+        void modName(char query[20])    // Modifying the Name
         {
             if(strcmp(query,name) == 0)
             {
@@ -631,6 +631,7 @@ start:
                                     m.modName(mName);
                                     f4.read((char *)&m,sizeof(m));
                                 }
+                                f4.write((char *)&m,sizeof(m));
 
                                 f4.close();
                                 if (flag == 0)
