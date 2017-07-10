@@ -1,4 +1,3 @@
-//Sample C++ program for Airline Reservation 
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -21,8 +20,8 @@ class BOOKING
         char departure[25];
         char arrival[25];
         char date[10];
+	int serial = 0;
         long long aadhar;
-
     public :
         void getName()
         {
@@ -71,39 +70,57 @@ class BOOKING
             {
                 cout << "\n\t\tSelect Your City of Departure\n";
                 cout << "\t\t-----------------------------\n";
-		        cout << "\t1. Patna\n";
-		        cout << "\t2. Amritsar\n";
-		        cout << "\t3. Bengaluru\n";
-		        cout << "\t4. New Delhi\n";
-		        cout << "\t5. Mumbai\n";
-		        cout << "\t6. Chandigarh\n";
+		cout << "\t1.  Patna\n";
+		cout << "\t2.  Amritsar\n";
+		cout << "\t3.  Bengaluru\n";
+		cout << "\t4.  New Delhi\n";
+		cout << "\t5.  Mumbai\n";
+		cout << "\t6.  Chandigarh\n";
+		cout << "\t7.  Allahabad\n";
+		cout << "\t8.  Chennai\n";
+		cout << "\t9.  Pune\n";
+		cout << "\t10. Varanasi\n";
 
-		        cout << "Please Input Your Choice Number :-  ";
+		cout << "Please Input Your Choice Number :-  ";
                 cin >> n;
-		        switch (n)
+
+		switch (n)
                 {
-                    case 1:
-                        strcpy(departure, "PATNA");
-                        break;
-                    case 2:
-                        strcpy(departure, "AMRITSAR");
-                        break;
-                    case 3:
-                        strcpy(departure, "BENGALURU");
-                        break;
-                    case 4:
-                        strcpy(departure, "NEW DELHI");
-                        break;
-                    case 5:
-                        strcpy(departure, "MUMBAI");
-                        break;
-                    case 6:
-                        strcpy(departure, "CHANDIGARH");
-                        break;
-                    default:
-                        cout << "Invalid Choice . Please Try Again.\n";
-                        k++;
-		        }
+                	case 1:
+                        	strcpy(departure, "PATNA");
+                        	break;
+                    	case 2:
+                        	strcpy(departure, "AMRITSAR");
+                        	break;
+                    	case 3:
+                        	strcpy(departure, "BENGALURU");
+                        	break;
+                    	case 4:
+                        	strcpy(departure, "NEW DELHI");
+                        	break;
+                    	case 5:
+                        	strcpy(departure, "MUMBAI");
+                        	break;
+                    	case 6:
+                        	strcpy(departure, "CHANDIGARH");
+                        	break;
+		    	case 7:
+				strcpy(departure, "ALLAHABAD");
+				break;
+		   	case 8:
+				strcpy(departure, "CHENNAI");
+				break;
+		    	case 9:
+				strcpy(departure, "PUNE");
+				break;
+			case 10:
+				strcpy(departure, "VARANASI");
+				break;
+		    
+                    	default:
+                        	cout << "Invalid Choice . Please Try Again.\n";
+                        	k++;
+		}
             }while(k != 0);
 
             int p = 0;
@@ -111,45 +128,66 @@ class BOOKING
             {
                 cout << "\n\t\tSelect Your City of Arrival\n";
                 cout << "\t\t---------------------------\n";
-                cout << "\t1. New Delhi\n";
-                cout << "\t2. Patna\n";
-                cout << "\t3. Mumbai\n";
-                cout << "\t4. Bengaluru\n";
-                cout << "\t5. Chennai\n";
-                cout << "\t6. Pondicherry\n";
+                cout << "\t1.  New Delhi\n";
+                cout << "\t2.  Patna\n";
+                cout << "\t3.  Mumbai\n";
+                cout << "\t4.  Bengaluru\n";
+                cout << "\t5.  Chennai\n";
+                cout << "\t6.  Pondicherry\n";
+		cout << "\t7.  Varanasi\n";
+		cout << "\t8.  Pune\n";
+		cout << "\t9.  Amritsar\n";
+		cout << "\t10. Allahabad\n";
 
                 cout << "Please Input Your Choice :- ";
                 cin >>n;
 
                 switch(n)
                 {
-                    case 1:
-                        strcpy(arrival,"NEW DELHI");
-                        break;
-                    case 2:
-                        strcpy(arrival,"PATNA");
-                        break;
-                    case 3:
-                        strcpy(arrival,"MUMBAI");
-                        break;
-                    case 4:
-                        strcpy(arrival,"BENGALURU");
-                        break;
-                    case 5:
-                        strcpy(arrival,"CHENNAI");
-                        break;
-                    case 6:
-                        strcpy(arrival,"PONDICHERRY");
-                        break;
-                   default:
-                        cout << "Invalid choice . Please Try Again.\n";
-                        p++;
+                    	case 1:
+                        	strcpy(arrival,"NEW DELHI");
+                        	break;
+                    	case 2:
+                        	strcpy(arrival,"PATNA");
+                        	break;
+                    	case 3:
+                        	strcpy(arrival,"MUMBAI");
+                        	break;
+                    	case 4:
+                        	strcpy(arrival,"BENGALURU");
+                        	break;
+                    	case 5:
+                        	strcpy(arrival,"CHENNAI");
+                        	break;
+                    	case 6:
+                        	strcpy(arrival,"PONDICHERRY");
+                        	break;
+			case 7:
+				strcpy(arrival,"VARANASI");
+				break;
+			case 8:
+				strcpy(arrival,"PUNE");
+				break;
+			case 9:
+				strcpy(arrival,"AMRITSAR");
+				break;
+			case 10:
+				strcpy(arrival,"ALLAHABAD");
+				break;
+                   	default:
+                        	cout << "Invalid choice . Please Try Again.\n";
+                        	p++;
                 }
             }while(p != 0);
 
             cout << "Date of Journey ( DD/MM/YYYY ) :- ";
             cin >> date;
         }
+	int getSerial()
+	{
+		serial = serial + 1;
+		return serial;
+	}
 
         //Now Functions for Comparison
         void searchName(char query[20])
@@ -281,34 +319,24 @@ class BOOKING
         int disInfo()
         {
             cout.setf(ios::left);
-            cout <<setw(15)<< name <<setw(12)<< date <<setw(20)<< add <<setw(15)<< mobile <<setw(30)<<email<<setw(20)<<aadhar<<setw(12)<< departure <<setw(12)<< arrival<<endl;
+            cout <<setw(2)<<serial<<setw(15)<< name <<setw(12)<< date <<setw(20)<< add <<setw(15)<< mobile <<setw(30)<<email<<setw(20)<<aadhar<<setw(12)<< departure <<setw(12)<< arrival<<endl;
         }
 
+	//########################################################################################################################################################
+	//                                                   RESERVATION PART                                                   
+	//########################################################################################################################################################
+	
+	void new_seat()
+	{
+
+	}
 };
-/*class FLIGHTS
+
+class FLIGHT
 {
-    char flight_no[10];
-    char flight_carrier[20];
-    char time_depart[10];
-    char time_arrival[10];
-
-    public :
-        int flightInfo()
-        {
-            cout << "Enter the Flight Number :- ";
-            cin >>flight_no;
-
-            cout << "Enter the Flight Carrier Name :- ";
-            cin >> flight_carrier;
-
-            cout << "Enter the departure time :- ";
-            cin >> time_depart;
-
-            cout << "Enter the arrival time :- ";
-            cin >> time_arrival;
-        }
-};*/
-
+	int flightNum;
+	
+};
 void adminPass()
 {
     char admin;
@@ -396,13 +424,14 @@ start:
                     b.getAadhar();
                     b.getMobile();
                     b.getTravel();
+		    b.getSerial();
                     f1.write((char *)&b , sizeof(b));
 
                     cout << "\n\t\tBooking Details are following\n";
                     cout << "\t\t-----------------------------\n";
                     cout.setf(ios::left);
-                    cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                    cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                    cout <<setw(2)<<"S.No"<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                    cout <<setw(2)<<"----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
                     b.disInfo();
                     cout << "\nDo you want to register again ?\n";
                     cout << "(Y for yes,N for no)";
@@ -467,8 +496,8 @@ start:
                             f3.seekg(0,ios::beg);
                             f3.read((char *)&s,sizeof(s));
                             cout.setf(ios::left);
-                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+		    	    cout <<setw(2)<<"S.No"<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(2)<<"----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
                             while(f3.eof() != 1)
                             {
@@ -500,8 +529,8 @@ start:
                             f3.read((char *)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(2)<<"S.No"<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(2)<<"----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
                             while (f3.eof() != 1)
                             {
@@ -534,8 +563,8 @@ start:
                             f3.read((char*)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(2)<<"S.No"<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(2)<<"----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
                             while (f3.eof() != 1)
                             {
@@ -568,8 +597,8 @@ start:
                             f3.read((char *)&s,sizeof(s));
 
                             cout.setf(ios::left);
-                            cout <<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
-                            cout <<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
+                            cout <<setw(2)<<"S.No"<<setw(15)<<"Name"<<setw(12)<<"Date"<<setw(20)<<"Address"<<setw(15)<<"Mobile"<<setw(30)<<"Email"<<setw(20)<<"Aadhar"<<setw(12)<<"Depart."<<setw(12)<<"Arrival"<<endl;
+                            cout <<setw(2)<<"----"<<setw(15)<<"----"<<setw(12)<<"----"<<setw(20)<<"-------"<<setw(15)<<"------"<<setw(30)<<"-----"<<setw(20)<<"------"<<setw(12)<<"-------"<<setw(12)<<"-------"<<endl;
 
                             while (f3.eof() != 1)
                             {
